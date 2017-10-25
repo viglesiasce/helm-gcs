@@ -1,0 +1,11 @@
+name: "gcs"
+version: "0.1.0"
+usage: "The plugin allows to use gcs protocol to upload, fetch charts and to work with repositories."
+description: |-
+  Provides Google Cloud Storage protocol support.
+  https://github.com/viglesiasce/helm-gcs
+command: "$HELM_PLUGIN_DIR/bin/gcs.sh"
+downloaders:
+- command: "bin/gcs.sh"
+  protocols:
+    - "gcs"
