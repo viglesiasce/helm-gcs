@@ -1,5 +1,5 @@
 name: "gcs"
-version: "0.1.0"
+version: "0.2.0"
 usage: "This plugin allows to use gcs protocol to upload, fetch charts and to work with repositories."
 description: |-
   Provides Google Cloud Storage protocol support.
