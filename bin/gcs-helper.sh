@@ -1,6 +1,9 @@
 #!/bin/bash -e
 
 function usage() {
+  if [[ ! -z "$1" ]]; then
+    printf "$1\n\n"
+  fi
   cat <<'  EOF'
   Helm plugin for using Google Cloud Storage as a private chart repository
 
@@ -29,8 +32,8 @@ COMMAND=$1
 case $COMMAND in
 init)
   BUCKET=$2
-  if [[ -z "$2" ]];then
-    echo "Please provide a bucket URL in the format gs://BUCKET"
+  if [[ -z "$2" ]]; then
+    usage "Error: Please provide a bucket URL in the format gs://BUCKET"
     exit 1
   else
     gsutil cp -n $HELM_PLUGIN_DIR/etc/index.yaml $BUCKET
@@ -39,6 +42,10 @@ init)
   fi
   ;;
 push)
+  if [[ -z "$2" ]] || [[ -z "$3" ]]; then
+    usage "Error: Please provide chart file and/or bucket URL in the format gs://BUCKET"
+    exit 1
+  fi
   CHART_PATH=$2
   BUCKET=$3
   TMP_DIR=$(mktemp -d)
