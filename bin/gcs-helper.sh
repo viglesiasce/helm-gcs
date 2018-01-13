@@ -1,4 +1,29 @@
 #!/bin/bash -e
+
+function usage() {
+  cat <<'  EOF'
+  Helm plugin for using Google Cloud Storage as a private chart repository
+
+  To begin working with helm-gcs plugin, authenticate gcloud
+
+    $ gcloud auth login
+
+  Usage:
+    helm gcs init [BUCKET_URL]
+    helm gcs push [CHART_FILE] [BUCKET_URL]
+
+  Available Commands:
+    init    Initialize an existing Cloud Storage Bucket to a Helm repo
+    push    Upload the chart to your bucket
+
+  Example:
+
+    $ helm gcs init gs://my-unique-helm-repo-bucket-name
+    $ helm gcs push my-chart-0.1.0.tgz gs://my-unique-helm-repo-bucket-name
+
+  EOF
+}
+
 COMMAND=$1
 
 case $COMMAND in
@@ -29,7 +54,6 @@ push)
   echo "Repository initialized..."
   ;;
 *)
-  # TODO turn this into usage()
-  echo "Please provide a command."
+  usage
   ;;
 esac
